@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form (ngSubmit)="onSubmit()" #f="ngForm" ngNativeValidate>
+                <div id="user-data">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" class="form-control" name="email" ngModel required email #email="ngModel">
+                    <span class="help-block" *ngIf="!email.valid && email.touched">Please Enter a valid Email</span>
+                </div>
+                <div id="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" class="form-control" name="password" ngModel required pattern="([a-zA-Z ]*">
+                    <input type="password" id="password" class="form-control" name="password" ngModel required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$">
+                </div>
+                <label>Gender: </label>
+                <div class="radio" *ngFor="let gender of genders">
+                    <label>
+                        <input type="radio" name="gender" ngModel [value] ="gender" required>{{ gender }}
+                    </label>
+                </div>
+                <div id="form-group">
+                    <label for="city">City:</label>
+                    <select name="city" id="city" class="form-control" [ngModel]="defaultQuestion" name="city" required>
+                        <option value="Dharamshala" >Dharamshala</option>
+                        <option value="Palampur" selected>Palampur</option>
+                        <option value="Kasauli">Kasauli</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="file">Choose Image</label>
+                    <input type="file" id="file" class="form-control" name="image" ngModel (change)="handleFileInput($event.target.files)">
+                </div>
+                <button class="btn btn-primary" type="submit" >Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+

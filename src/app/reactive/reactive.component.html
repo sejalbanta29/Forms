@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form [formGroup] ="signupForm" (ngSubmit) = "onSubmit()">
+                <div id="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" class="form-control" name="email" formControlName="email">
+                    <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="help-block">Please Enter a valid Email</span>
+                </div>
+                <div id="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" class="form-control" name="password" formControlName="password" >
+                </div>
+                <label>Gender: </label>
+                <div class="radio" *ngFor="let gender of genders">
+                    <label>
+                        <input type="radio" formControlName="gender" [value] ="gender">{{ gender }}
+                    </label>
+                </div>
+                <div id="form-group">
+                    <label for="city">City:</label>
+                    <select name="city" id="city" class="form-control" name="city" required>
+                        <option value="Dharamshala" >Dharamshala</option>
+                        <option value="Palampur" selected>Palampur</option>
+                        <option value="Kasauli">Kasauli</option>
+                    </select>
+                </div>
+                <div id="form-group">
+                    <label for="File">Choose Image</label>
+                    <input type="file" id="file" class="form-control" name="image" formControlName="file" (change)="onFileChange($event)">
+                    <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                        <div *ngIf="f.file.errors.required">File is Required</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit" >Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
